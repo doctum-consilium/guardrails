@@ -31,3 +31,14 @@
 - Keep YAML focused on declarative infrastructure and configuration; application logic must live in versioned source files.
 - For Kubernetes, mount code via image builds or file-backed ConfigMaps generated from repository files, not inline heredocs.
 - Any temporary inline script in YAML must be short, documented with rationale, and tracked for removal in TODO.
+
+## Git Commit Standards
+- The commit author is always the human developer (git config user.name / user.email). Never add AI attribution (`Co-Authored-By:` or equivalent) unless explicitly requested.
+- Use conventional commits: `feat|fix|docs|chore|refactor|test|ci(scope): message`, subject ≤72 chars.
+- Never use `--no-verify` or `--no-gpg-sign` unless explicitly authorized — investigate hook failures instead.
+- Never amend published commits; create new commits for post-merge fixes.
+
+## AI-Assisted Session Standards
+- At the end of every significant AI-assisted session, produce a compte rendu covering: what changed, problems encountered, system health, next steps.
+- AI agents must not make destructive actions (force-push, drop tables, delete branches) without explicit human confirmation.
+- Never hardcode secrets generated during a session; rotate any secret accidentally exposed immediately.
