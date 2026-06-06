@@ -35,3 +35,24 @@ htmlcov/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+
+
+# === Cleanup additions 2026-06-06 ===
+
+# Secrets & credentials
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.*.example
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+
+
+# Claude Code local settings (per-user, never commit)
+.claude/settings.local.json
+
+# === End cleanup ===
