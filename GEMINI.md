@@ -1,6 +1,9 @@
-# CLAUDE.md
+# GEMINI.md
 
-This file defines Claude Code execution rules for `guardrails-kit`.
+This file defines execution rules for Google's AI assistants and IDEs in `guardrails-kit`:
+- **Gemini CLI** (`gemini` command)
+- **Gemini Assistant** (VS Code extension)
+- **Antigravity IDE** (Google AI development platform)
 
 ## Mandatory Sources of Truth
 - `README.md` (MANDATORY: Must exist, create if missing)
@@ -8,6 +11,9 @@ This file defines Claude Code execution rules for `guardrails-kit`.
 - `SKILLS.md` (if present)
 - `ROADMAP.md` (MANDATORY: Must exist, create if missing)
 - `.github/copilot-instructions.md`
+
+## Project Context
+guardrails-kit — [Add project description here]
 
 ## Execution Principles
 1. Read sources of truth before any non-trivial task.
@@ -41,31 +47,59 @@ This file defines Claude Code execution rules for `guardrails-kit`.
   # Naming: deploy-<service>, build-<tag>, k3s-ops, ecr-refresh
   ```
 - On Windows: use Windows Terminal tabs or Start-Process with file logging.
+- On macOS: same tmux convention applies.
 
 ## Environment Policy
 - Use a single standard environment per repo when possible.
-- Use GPU if available and compatible; otherwise CPU in the same environment.
 - Parallel environments allowed only if technically unavoidable — document reason, limits, naming, activation.
 
 ## Platform Compatibility
-- Critical automation scripts must provide Ubuntu (Bash) and Windows (PowerShell) execution.
-- macOS (zsh/bash) compatibility is required when the script uses only POSIX-standard commands.
+- Critical automation scripts must support Ubuntu (Bash), Windows (PowerShell), and macOS (zsh/bash).
 - Any exception must be documented with an operational alternative.
 
-## Git Commit Policy (Mandatory)
-- The commit author is always the git config user (`git config user.name` / `user.email`).
-- NEVER add a `Co-Authored-By:` trailer or any other AI attribution line to commits.
-- Write commit messages in the imperative mood, short subject (≤72 chars), body if needed.
-- Use conventional commits: `feat|fix|docs|chore|refactor|test|ci(scope): message`.
+## Gemini CLI Configuration
+```bash
+# Add repository context to Gemini CLI
+gemini context add . --name guardrails-kit
+gemini context add README.md --priority high
+gemini context add INFRASTRUCTURE.md --priority high
+gemini context add ROADMAP.md --priority high
 
-## Session End Report (Mandatory)
-At the end of every significant work session, produce a brief compte rendu in the conversation containing:
-1. **Ce qui a été fait** — liste des changements effectués (fichiers, commits, déploiements).
-2. **Problèmes rencontrés** — erreurs, blocages, workarounds utilisés.
-3. **État du système** — santé des pods / services / CI si applicable.
-4. **Prochaines étapes** — ce qui reste à faire.
+# Run tasks with Gemini CLI
+gemini run "Explain the project architecture"
+gemini run "Generate documentation"
+```
 
-## Hooks (if present)
-- Preflight: `.claude/hooks/preflight.ps1` and `.claude/hooks/preflight.sh`
-- Post-task check: `.claude/hooks/post-task.ps1` and `.claude/hooks/post-task.sh`
-- Usage details: `.claude/hooks/README.md`
+## Gemini Assistant (VS Code Extension)
+- **Extension**: `google.gemini-assistant` (install from VS Code Marketplace)
+- **Context**: Automatically reads `README.md`, `ROADMAP.md`, `.github/copilot-instructions.md`, and this file
+- **Slash Commands**: `/check`, `/explain`, `/improve`, `/generate`, `/review`, `/test`
+- **Triggering**: Highlight code, press `Cmd+.` (macOS) or `Ctrl+.` (Linux/Windows) to open AI commands
+
+## Antigravity IDE Integration
+Start the repository in Antigravity IDE:
+```bash
+antigravity /path/to/guardrails-kit
+```
+
+Antigravity will automatically:
+1. Load all folders and context from this repository
+2. Index documentation (`README.md`, `INFRASTRUCTURE.md`, `ROADMAP.md`)
+3. Enable built-in AI copilot via `Cmd+K` (macOS) or `Ctrl+K` (Linux/Windows)
+
+### Common Antigravity AI Queries
+- "Explain the README"
+- "Generate unit tests for this module"
+- "Review this code change"
+- "Document this function"
+- "Fix linting errors"
+
+## Multi-AI Compatibility
+This repository is compatible with all major AI development tools:
+- **Claude Code** (via `CLAUDE.md`)
+- **GitHub Copilot** (via `.github/copilot-instructions.md`)
+- **Gemini CLI** (via `gemini context add`)
+- **Gemini Assistant** (VS Code extension, this file)
+- **Antigravity IDE** (native support)
+
+All instructions follow vendor-neutral standards focused on reproducible, high-quality outcomes.

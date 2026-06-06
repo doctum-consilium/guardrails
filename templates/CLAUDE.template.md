@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file defines Claude Code execution rules for `guardrails-kit`.
+This file defines Claude Code execution rules for `{{PROJECT_NAME}}`.
 
 ## Mandatory Sources of Truth
 - `README.md` (MANDATORY: Must exist, create if missing)
