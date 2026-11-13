@@ -1,0 +1,10 @@
+# Exceptions d'osv-scanner (job « Dépendances » de .github/workflows/securite.yml).
+#
+# Une vulnérabilité connue dans ce qui part en production fait échouer la CI. Si on ne peut pas
+# la corriger tout de suite, on la déclare ici : identifiant, raison, date de fin. Passé
+# `ignoreUntil`, la CI redevient rouge : une exception ne s'oublie pas.
+#
+# [[IgnoredVulns]]
+# id = "GHSA-xxxx-xxxx-xxxx"
+# ignoreUntil = 2026-12-31T00:00:00Z
+# reason = "pourquoi ce n'est pas corrigé aujourd'hui, et où c'est suivi"
